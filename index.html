@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Countdown by charpov</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Countdown</h1>
+      <h2 class="project-tagline">Countdown (and up) clocks in JavaScript</h2>
+      <a href="https://github.com/charpov/CountDown" class="btn">View on GitHub</a>
+      <a href="https://github.com/charpov/CountDown/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/charpov/CountDown/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="countdown" class="anchor" href="#countdown" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>CountDown</h1>
+
+<p><em>Countdown (and up) clocks in JavaScript</em></p>
+
+<p><strong>Version 1.0</strong></p>
+
+<p>This JavaScript code implements simple counting clocks (up and/or down).  They are intended to be straightforward to insert into HTML but also offer limited customization for specific needs.  Clocks are live and their text is updated every second by default.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Add the file to your scripts.  I also maintain the latest version on my website, so adding this to the HTML header should do the trick:</p>
+
+<blockquote>
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>http://www.cs.unh.edu/~charpov/Scripts/countdown.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;  </pre></div>
+</blockquote>
+
+<p>This will enable the three functions, <code>countDown</code>, <code>countUp</code> and <code>countDownUp</code> described below.  See file <code>demo.html</code> for a template.</p>
+
+<h2>
+<a id="basic-usage" class="anchor" href="#basic-usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Basic usage</h2>
+
+<p>In its most basic usage, a counting clock can be used like this:</p>
+
+<blockquote>
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">span</span>&gt;<span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;<span class="pl-en">countDown</span>(<span class="pl-s"><span class="pl-pds">'</span>2017-01-01<span class="pl-pds">'</span></span>)&lt;/<span class="pl-ent">script</span>&gt;</span>&lt;/<span class="pl-ent">span</span>&gt; left in 2016!</pre></div>
+</blockquote>
+
+<p>which produces something like this:</p>
+
+<blockquote>
+<p>218 days, 23 hours, 58 minutes and 18 seconds left in 2016!</p>
+</blockquote>
+
+<p>The <code>&lt;span&gt;</code> element is important because the function will replace the entire contents of its containing element with a string.  Without the <code>&lt;span&gt;</code> (or some other element), this string could overwrite the entire page!</p>
+
+<p>The remaining time can be displayed without seconds, minutes or hours.  For instance:</p>
+
+<blockquote>
+<div class="highlight highlight-text-html-basic"><pre>a mere &lt;<span class="pl-ent">span</span>&gt;<span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;<span class="pl-en">countDown</span>(<span class="pl-s"><span class="pl-pds">'</span>2101-01-01<span class="pl-pds">'</span></span>, {step<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>D<span class="pl-pds">'</span></span>})&lt;/<span class="pl-ent">script</span>&gt;</span>&lt;/<span class="pl-ent">span</span>&gt; till the next century.</pre></div>
+</blockquote>
+
+<p>will look like this:</p>
+
+<blockquote>
+<p>a mere 30899 days till the next century.</p>
+</blockquote>
+
+<p>The <code>countUp</code> variant counts up from a past date:</p>
+
+<blockquote>
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">span</span>&gt;<span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;<span class="pl-en">countUp</span>(<span class="pl-s"><span class="pl-pds">'</span>21 July 1969 02:56 UTC<span class="pl-pds">'</span></span>, {step<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>M<span class="pl-pds">'</span></span>})&lt;/<span class="pl-ent">script</span>&gt;</span>&lt;/<span class="pl-ent">span</span>&gt; since Neil Armstrong stepped on the Moon...</pre></div>
+</blockquote>
+
+<p>with this output:</p>
+
+<blockquote>
+<p>17111 days, 21 hours and 4 minutes since Neil Armstrong stepped on the Moon…</p>
+</blockquote>
+
+<p>There is also a <code>countDownUp</code> function that first counts down, then up once the specified date has passed.  It is discussed in the next section.</p>
+
+<p>Note that the last two example are a bit inefficient because the time string is recalculated every second.  It would be better to write:</p>
+
+<blockquote>
+<div class="highlight highlight-text-html-basic"><pre>a mere &lt;<span class="pl-ent">span</span>&gt;<span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;<span class="pl-en">countDown</span>(<span class="pl-s"><span class="pl-pds">'</span>2101-01-01<span class="pl-pds">'</span></span>, {step<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>D<span class="pl-pds">'</span></span>, refresh<span class="pl-k">:</span> <span class="pl-c1">300</span>})&lt;/<span class="pl-ent">script</span>&gt;</span>&lt;/<span class="pl-ent">span</span>&gt; till the next century.
+&lt;<span class="pl-ent">span</span>&gt;<span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;<span class="pl-en">countUp</span>(<span class="pl-s"><span class="pl-pds">'</span>21 July 1969 02:56 UTC<span class="pl-pds">'</span></span>, {step<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>M<span class="pl-pds">'</span></span>, refresh<span class="pl-k">:</span> <span class="pl-c1">30</span>})&lt;/<span class="pl-ent">script</span>&gt;</span>&lt;/<span class="pl-ent">span</span>&gt; since Neil Armstrong stepped on the Moon...</pre></div>
+</blockquote>
+
+<p>This way, the century case is updated every 5 minutes and the Moon landing text every 30 seconds.</p>
+
+<h2>
+<a id="advanced-usage" class="anchor" href="#advanced-usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Advanced usage</h2>
+
+<p>What happens when a clock reaches zero?  A regular countdown clock simply stops, but what is displayed?  A <code>countDownUp</code> clock continues, but how can the surrounding text makes sense before and after the deadline has passed?</p>
+
+<p>These scenarios can be handled using a few additional arguments, namely <code>prefix</code> (displayed before the clock string), <code>suffix</code> (after the clock string) and <code>atTime</code> (when the deadline has been reached).  For instance:</p>
+
+<blockquote>
+<div class="highlight highlight-text-html-basic"><pre>the tournament &lt;<span class="pl-ent">span</span>&gt;<span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;<span class="pl-en">countDown</span>(someDate, {prefix<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>will begin in <span class="pl-pds">"</span></span>, atDate<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>has begun<span class="pl-pds">"</span></span>})&lt;/<span class="pl-ent">script</span>&gt;</span>&lt;/<span class="pl-ent">span</span>&gt;.</pre></div>
+</blockquote>
+
+<p>will display:</p>
+
+<blockquote>
+<p>the tournament will begin in ...</p>
+</blockquote>
+
+<p>while the clock is running, then will switch to:</p>
+
+<blockquote>
+<p>the tournament has begun.</p>
+</blockquote>
+
+<p>after the specified date has been reached.</p>
+
+<p>Here is a variant that uses both <code>prefix</code> and <code>suffix</code>:</p>
+
+<blockquote>
+<div class="highlight highlight-text-html-basic"><pre>the tournament &lt;<span class="pl-ent">span</span>&gt;<span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;<span class="pl-en">countDown</span>(someDate, {prefix<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>will begin in <span class="pl-pds">"</span></span>, suffix<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>.<span class="pl-pds">'</span></span>, atDate<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>has begun!<span class="pl-pds">"</span></span>})&lt;/<span class="pl-ent">script</span>&gt;</span>&lt;/<span class="pl-ent">span</span>&gt;</pre></div>
+</blockquote>
+
+<p>Function <code>countDownUp</code> takes two sets of arguments, one for the count down and one for the count up.  Here is a final example:</p>
+
+<blockquote>
+<div class="highlight highlight-text-html-basic"><pre>I &lt;<span class="pl-ent">span</span>&gt;<span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1">    <span class="pl-k">var</span> argsDown <span class="pl-k">=</span> {prefix<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>am retiring in <span class="pl-pds">"</span></span>, atDate<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span> am retiring..<span class="pl-pds">"</span></span>};</span>
+<span class="pl-s1">    <span class="pl-k">var</span> argsUp <span class="pl-k">=</span> {atDate<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span> am retired<span class="pl-pds">"</span></span>, prefix<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>have enjoyed <span class="pl-pds">"</span></span>, suffix<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span> of retirement<span class="pl-pds">"</span></span>, step<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>D<span class="pl-pds">'</span></span>, refresh<span class="pl-k">:</span> <span class="pl-c1">3600</span>};</span>
+<span class="pl-s1">    <span class="pl-en">countDownUp</span>(someDate, argsDown, argsUp);</span>
+<span class="pl-s1">  &lt;/<span class="pl-ent">script</span>&gt;</span>&lt;/<span class="pl-ent">span</span>&gt;.</pre></div>
+</blockquote>
+
+<p>This will display messages of the form <code>I am retiring in ...</code> until retirement date, then <code>I am retiring...</code> for 1 second, then <code>I am retired</code> for one day, then <code>I have enjoyed ... days of retirement</code> after that.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/charpov/CountDown">Countdown</a> is maintained by <a href="https://github.com/charpov">charpov</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
