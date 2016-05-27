@@ -7,10 +7,10 @@ This JavaScript code implements simple counting clocks (up and/or down).  They a
 
 ## Installation
 
-Add the file to your scripts.  I also maintain the latest version on my website, so adding this to the HTML header should do the trick:
+Add the file to your scripts or refer to it directly and trust your browser's cache. Adding this to the HTML header should do the trick:
 
 >```html
-<script src="http://www.cs.unh.edu/~charpov/Scripts/countdown.js"></script>  
+<script src="http://charpov.github.io/CountDown/scripts/countdown.js"></script>  
 ```
 
 This will enable the three functions, `countDown`, `countUp` and `countDownUp` described below.  See file `demo.html` for a template.
