@@ -13,7 +13,7 @@ Add the file to your scripts.  I also maintain the latest version on my website,
 <script src="http://www.cs.unh.edu/~charpov/Scripts/countdown.js"></script>  
 ```
 
-This will enable the three functions, `countDown`, `countUp` and `countDownUp` described below.
+This will enable the three functions, `countDown`, `countUp` and `countDownUp` described below.  See file `demo.html` for a template.
 
 ## Basic usage
 
