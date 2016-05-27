@@ -1,5 +1,13 @@
 "use strict";
 
+/** This script exports three functions countDown, countUp and countDownUp that can be used to
+* embed text-based time counters into web pages.
+*
+* @author Michel Charpentier
+* @copyright Michel Charpentier 2016 under MIT license
+* @version 1.0
+*/
+
 // The 3 exported functions
 var countDown, countUp, countDownUp;
 
