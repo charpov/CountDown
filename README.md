@@ -1,9 +1,21 @@
 # CountDown
 _Countdown (and up) clocks in JavaScript_
 
+**Version 1.0**
+
 This JavaScript code implements simple counting clocks (up and/or down).  They are intended to be straightforward to insert into HTML but also offer limited customization for specific needs.  Clocks are live and their text is updated every second by default.
 
-### Basic usage
+## Installation
+
+Add the file to your scripts.  I also maintain the latest version on my website, so adding this to the HTML header should do the trick:
+
+>```html
+<script src="http://www.cs.unh.edu/~charpov/Scripts/countdown.js"></script>  
+```
+
+This will enable the three functions, `countDown`, `countUp` and `countDownUp` described below.
+
+## Basic usage
 
 In its most basic usage, a counting clock can be used like this:
 
@@ -49,7 +61,7 @@ a mere <span><script>countDown('2101-01-01', {step: 'D', refresh: 300})</script>
 
 This way, the century case is updated every 5 minutes and the Moon landing text every 30 seconds.
 
-### Advanced usage
+## Advanced usage
 
 What happens when a clock reaches zero?  A regular countdown clock simply stops, but what is displayed?  A `countDownUp` clock continues, but how can the surrounding text makes sense before and after the deadline has passed?
 
