@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>Countdown by charpov</title>
+    <title>Countdown</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -16,6 +16,7 @@
       <a href="https://github.com/charpov/CountDown" class="btn">View on GitHub</a>
       <a href="https://github.com/charpov/CountDown/zipball/master" class="btn">Download .zip</a>
       <a href="https://github.com/charpov/CountDown/tarball/master" class="btn">Download .tar.gz</a>
+      <script src="scripts/countdown.js"></script>
     </section>
 
     <section class="main-content">
@@ -31,10 +32,10 @@
 <h2>
 <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
 
-<p>Add the file to your scripts.  I also maintain the latest version on my website, so adding this to the HTML header should do the trick:</p>
+<p>Add the file to your scripts or refer to it directly and trust your browser's cache.  Adding this to the HTML header should do the trick:</p>
 
 <blockquote>
-<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>http://www.cs.unh.edu/~charpov/Scripts/countdown.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;  </pre></div>
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>http://charpov.github.io/CountDown/scripts/countdown.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;  </pre></div>
 </blockquote>
 
 <p>This will enable the three functions, <code>countDown</code>, <code>countUp</code> and <code>countDownUp</code> described below.  See file <code>demo.html</code> for a template.</p>
@@ -51,7 +52,7 @@
 <p>which produces something like this:</p>
 
 <blockquote>
-<p> left in 2016!</p>
+<p><span><script>countDown('2017-01-01')</script></span> left in 2016!</p>
 </blockquote>
 
 <p>The <code>&lt;span&gt;</code> element is important because the function will replace the entire contents of its containing element with a string.  Without the <code>&lt;span&gt;</code> (or some other element), this string could overwrite the entire page!</p>
@@ -65,7 +66,7 @@
 <p>will look like this:</p>
 
 <blockquote>
-<p>a mere  till the next century.</p>
+<p>a mere <span><script>countDown('2101-01-01', {step: 'D'})</script></span> till the next century.</p>
 </blockquote>
 
 <p>The <code>countUp</code> variant counts up from a past date:</p>
@@ -77,7 +78,7 @@
 <p>with this output:</p>
 
 <blockquote>
-<p> since Neil Armstrong stepped on the Moon...</p>
+<p><span><script>countUp('21 July 1969 02:56 UTC', {step: 'M'})</script></span> since Neil Armstrong stepped on the Moon...</p>
 </blockquote>
 
 <p>There is also a <code>countDownUp</code> function that first counts down, then up once the specified date has passed.  It is discussed in the next section.</p>
@@ -122,6 +123,10 @@
 <div class="highlight highlight-text-html-basic"><pre>the tournament &lt;<span class="pl-ent">span</span>&gt;<span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;<span class="pl-en">countDown</span>(someDate, {prefix<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>will begin in <span class="pl-pds">"</span></span>, suffix<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>.<span class="pl-pds">'</span></span>, atDate<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>has begun!<span class="pl-pds">"</span></span>})&lt;/<span class="pl-ent">script</span>&gt;</span>&lt;/<span class="pl-ent">span</span>&gt;</pre></div>
 </blockquote>
 
+<p><em><script>
+    countDown(new Date().getTime()+300000, {prefix: "This line will self-destruct in ", suffix: '.'})
+</script></em></p>
+  
 <p>Function <code>countDownUp</code> takes two sets of arguments, one for the count down and one for the count up.  Here is a final example:</p>
 
 <blockquote>
