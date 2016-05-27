@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+<script src="http://www.cs.unh.edu/~charpov/Scripts/countdown.js"></script>
+</head>
+<body>
+
+<h1 id="countingclocks">Counting Clocks</h1>
+
+<p>This JavaScript code implements simple counting clocks (up and/or down). They are intended to be straightforward to insert into HTML but also offer limited customization for specific needs.</p>
+
+<h2 id="installation">Installation</h2>
+
+<p>Add the file to your scripts. I also maintain the latest version on my website, so adding this to the HTML header should do the trick:</p>
+
+<blockquote>
+<pre><code class="html">&lt;script src=&quot;http://www.cs.unh.edu/~charpov/Scripts/countdown.js&quot;&gt;&lt;/script&gt;  
+</code></pre>
+</blockquote>
+
+<p>This will enable the three functions, <code>countDown</code>, <code>countUp</code> and <code>countDownUp</code> described below.</p>
+
+<h2 id="basicusage">Basic usage</h2>
+
+<p>In its most basic usage, a counting clock can be used like this:</p>
+
+<blockquote>
+<pre><code class="html">&lt;span&gt;&lt;script&gt;countDown('2017-01-01')&lt;/script&gt;&lt;/span&gt; left in 2016!
+</code></pre>
+</blockquote>
+
+<p>which produces this:</p>
+
+<blockquote>
+<p><span><script>countDown('2017-01-01')</script></span> left in 2016!</p>
+</blockquote>
+
+<p>The <code>&lt;span&gt;</code> element is important because the function will replace the entire contents of its containing element with a string. Without the <code>&lt;span&gt;</code> (or some other element), this string could overwrite the entire page!</p>
+
+<p>The remaining time can be displayed without seconds, minutes or hours. For instance:</p>
+
+<blockquote>
+<pre><code class="html">a mere &lt;span&gt;&lt;script&gt;countDown('2101-01-01', {step: 'D'})&lt;/script&gt;&lt;/span&gt; till the next century.
+</code></pre>
+</blockquote>
+
+<p>will look like this:</p>
+
+<blockquote>
+<p>a mere <span><script>countDown('2101-01-01', {step: 'D'})</script></span> till the next century.</p>
+</blockquote>
+
+<p>The <code>countUp</code> variant counts up from a past date:</p>
+
+<blockquote>
+<pre><code class="html">&lt;span&gt;&lt;script&gt;countUp('21 July 1969 02:56 UTC', {step: 'M'})&lt;/script&gt;&lt;/span&gt; since Neil Armstrong stepped on the Moon...
+</code></pre>
+</blockquote>
+
+<p>with this output:</p>
+
+<blockquote>
+<p><span><script>countUp('21 July 1969 02:56 UTC', {step: 'M'})</script></span> since Neil Armstrong stepped on the Moon&#8230;</p>
+</blockquote>
+
+<p>There is also a <code>countDownUp</code> function that first counts down, then up once the specified date has passed. It is discussed in the next section.</p>
+
+<p>Note that the last two example are a bit inefficient because the time string is recalculated every second. It would be better to write:</p>
+
+<blockquote>
+<pre><code class="html">a mere &lt;span&gt;&lt;script&gt;countDown('2101-01-01', {step: 'D', refresh: 300})&lt;/script&gt;&lt;/span&gt; till the next century.
+&lt;span&gt;&lt;script&gt;countUp('21 July 1969 02:56 UTC', {step: 'M', refresh: 30})&lt;/script&gt;&lt;/span&gt; since Neil Armstrong stepped on the Moon...
+</code></pre>
+</blockquote>
+
+<p>This way, the century case is updated every 5 minutes and the Moon landing text every 30 seconds.</p>
+
+<h2 id="advancedusage">Advanced usage</h2>
+
+<p>What happens when a clock reaches zero? A regular countdown clock simply stops, but what is displayed? A <code>countDownUp</code> clock continues, but how can the surrounding text makes sense before and after the deadline has passed?</p>
+
+<p>These scenarios can be handled using a few additional arguments, namely <code>prefix</code> (displayed before the clock string), <code>suffix</code> (after the clock string) and <code>atTime</code> (when the deadline has been reached). For instance:</p>
+
+<blockquote>
+<pre><code class="html">the tournament &lt;span&gt;&lt;script&gt;countDown(someDate, {prefix: &quot;will begin in &quot;, atDate: &quot;has begun&quot;})&lt;/script&gt;&lt;/span&gt;.
+</code></pre>
+</blockquote>
+
+<p>will display:</p>
+
+<blockquote>
+<p>the tournament will begin in &#8230;</p>
+</blockquote>
+
+<p>while the clock is running, then will switch to:</p>
+
+<blockquote>
+<p>the tournament has begun.</p>
+</blockquote>
+
+<p>after the specified date has been reached.</p>
+
+<p>Here is a variant that uses both <code>prefix</code> and <code>suffix</code>:</p>
+
+<blockquote>
+<pre><code class="html">the tournament &lt;span&gt;&lt;script&gt;countDown(someDate, {prefix: &quot;will begin in &quot;, suffix: '.', atDate: &quot;has begun!&quot;})&lt;/script&gt;&lt;/span&gt;
+</code></pre>
+</blockquote>
+
+<p><em><script>
+    countDown(new Date().getTime()+300000, {prefix: "This line will self-destruct in ", suffix: '.'})
+</script></em></p>
+
+<p>Function <code>countDownUp</code> takes two sets of arguments, one for the count down and one for the count up. Here is a final example:</p>
+
+<blockquote>
+<pre><code class="html">I &lt;span&gt;&lt;script&gt;
+    var argsDown = {prefix: &quot;am retiring in &quot;, atDate: &quot; am retiring..&quot;};
+    var argsUp = {atDate: &quot; am retired&quot;, prefix: &quot;have enjoyed &quot;, suffix: &quot; of retirement&quot;, step: 'D', refresh: 3600};
+    countDownUp(someDate, argsDown, argsUp);
+  &lt;/script&gt;&lt;/span&gt;.
+</code></pre>
+</blockquote>
+
+<p>This will display messages of the form <code>I am retiring in ...</code> until retirement date, then <code>I am retiring...</code> for 1 second, then <code>I am retired</code> for one day, then <code>I have enjoyed ... days of retirement</code> after that.</p>
+
+</body>
+</html>
