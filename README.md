@@ -1,7 +1,7 @@
 # CountDown
 _Countdown (and up) clocks in JavaScript_
 
-**Version 1.0**
+**Version 1.0.1**
 
 This JavaScript code implements simple counting clocks (up and/or down).  They are intended to be straightforward to insert into HTML but also offer limited customization for specific needs.  Clocks are live and their text is updated every second by default.
 

@@ -5,7 +5,7 @@
 *
 * @author Michel Charpentier
 * @copyright Michel Charpentier 2016 under MIT license
-* @version 1.0
+* @version 1.0.1
 */
 
 // The 3 exported functions
@@ -107,31 +107,33 @@ var countDown, countUp, countDownUp;
       var now = new Date();
       var secs = (endDate - now) / 1000;
       var stop = dir * secs > 0; // happens when a countdown reaches zero
-      secs = Math.abs(secs);
-      d = Math.floor(secs / 86400);
-      secs %= 86400;
-      if (secs >= limit) {
-        h = Math.floor(secs / 3600);
-        secs %= 3600;
-      }
-      if (secs >= limit) {
-        m = Math.floor(secs / 60);
-        secs %= 60;
-      }
-      if (secs >= limit)
-        s = Math.floor(secs);
-      out = format(d, h, m, s);
-      if (out)
-        out = prefix + out + suffix;
-      else
-        out = atDate;
-      span.innerHTML = out;
       if (stop) {
         clearInterval(timer); // stop the current timer
         // if there is a continuation (for a countup), start it (it will have its own timer)
         if (cont)
           cont(span);
+        out = atDate;
+      } else {
+        secs = Math.abs(secs);
+        d = Math.floor(secs / 86400);
+        secs %= 86400;
+        if (secs >= limit) {
+          h = Math.floor(secs / 3600);
+          secs %= 3600;
+        }
+        if (secs >= limit) {
+          m = Math.floor(secs / 60);
+          secs %= 60;
+        }
+        if (secs >= limit)
+          s = Math.floor(secs);
+        out = format(d, h, m, s);
+        if (out)
+          out = prefix + out + suffix;
+        else
+          out = atDate;
       }
+      span.innerHTML = out;
     }
 
     // one first call to the task because timer has an initial delay
