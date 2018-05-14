@@ -20,12 +20,12 @@ This will enable the three functions, `countDown`, `countUp` and `countDownUp` d
 In its most basic usage, a counting clock can be used like this:
 
 >```html
-<span><script>countDown('2017-01-01')</script></span> left in 2016!
+<span><script>countDown('2019-01-01')</script></span> left in 2018!
 ```
 
 which produces something like this:
 
->218 days, 23 hours, 58 minutes and 18 seconds left in 2016!
+>218 days, 23 hours, 58 minutes and 18 seconds left in 2018!
 
 The `<span>` element is important because the function will replace the entire contents of its containing element with a string.  Without the `<span>` (or some other element), this string could overwrite the entire page!
 
