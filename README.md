@@ -20,12 +20,12 @@ This will enable the three functions, `countDown`, `countUp` and `countDownUp` d
 In its most basic usage, a counting clock can be used like this:
 
 >```html
-<span><script>countDown('2019-01-01')</script></span> left in 2018!
+<span><script>countDown('2020-01-01')</script></span> left in 2019!
 ```
 
 which produces something like this:
 
->218 days, 23 hours, 58 minutes and 18 seconds left in 2018!
+>218 days, 23 hours, 58 minutes and 18 seconds left in 2019!
 
 The `<span>` element is important because the function will replace the entire contents of its containing element with a string.  Without the `<span>` (or some other element), this string could overwrite the entire page!
 
@@ -45,10 +45,6 @@ The `countUp` variant counts up from a past date:
 >```html
 <span><script>countUp('21 July 1969 02:56 UTC', {step: 'M'})</script></span> since Neil Armstrong stepped on the Moon...
 ```
-
-with this output:
-
->17111 days, 21 hours and 4 minutes since Neil Armstrong stepped on the Moon…
 
 There is also a `countDownUp` function that first counts down, then up once the specified date has passed.  It is discussed in the next section.
 
